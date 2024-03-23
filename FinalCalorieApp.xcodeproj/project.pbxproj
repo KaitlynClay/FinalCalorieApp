@@ -17,6 +17,12 @@
 		3F3A27A52BAB8C6C0051C218 /* FinalCalorieAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A27A42BAB8C6C0051C218 /* FinalCalorieAppTests.swift */; };
 		3F3A27AF2BAB8C6C0051C218 /* FinalCalorieAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A27AE2BAB8C6C0051C218 /* FinalCalorieAppUITests.swift */; };
 		3F3A27B12BAB8C6C0051C218 /* FinalCalorieAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A27B02BAB8C6C0051C218 /* FinalCalorieAppUITestsLaunchTests.swift */; };
+		3FC793BC2BAE99B100C53747 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC793BB2BAE99B100C53747 /* LoginViewController.swift */; };
+		3FC793BE2BAE99F400C53747 /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC793BD2BAE99F400C53747 /* BMIViewController.swift */; };
+		3FC793C02BAE9A2400C53747 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC793BF2BAE9A2400C53747 /* ProfileViewController.swift */; };
+		3FC793C22BAE9A4C00C53747 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC793C12BAE9A4C00C53747 /* ProfileEditViewController.swift */; };
+		3FC793C62BAF490000C53747 /* CalJournalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC793C52BAF490000C53747 /* CalJournalViewController.swift */; };
+		3FC793CA2BAF7D7800C53747 /* food-1050813_1280.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3FC793C92BAF7D7800C53747 /* food-1050813_1280.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +57,12 @@
 		3F3A27AA2BAB8C6C0051C218 /* FinalCalorieAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalCalorieAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F3A27AE2BAB8C6C0051C218 /* FinalCalorieAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCalorieAppUITests.swift; sourceTree = "<group>"; };
 		3F3A27B02BAB8C6C0051C218 /* FinalCalorieAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCalorieAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3FC793BB2BAE99B100C53747 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3FC793BD2BAE99F400C53747 /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
+		3FC793BF2BAE9A2400C53747 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		3FC793C12BAE9A4C00C53747 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		3FC793C52BAF490000C53747 /* CalJournalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalJournalViewController.swift; sourceTree = "<group>"; };
+		3FC793C92BAF7D7800C53747 /* food-1050813_1280.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "food-1050813_1280.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +117,16 @@
 				3F3A278C2BAB8C690051C218 /* SceneDelegate.swift */,
 				3F3A278E2BAB8C690051C218 /* ViewController.swift */,
 				3F3A27902BAB8C690051C218 /* Main.storyboard */,
+				3FC793C52BAF490000C53747 /* CalJournalViewController.swift */,
+				3FC793C12BAE9A4C00C53747 /* ProfileEditViewController.swift */,
+				3FC793BF2BAE9A2400C53747 /* ProfileViewController.swift */,
 				3F3A27962BAB8C6B0051C218 /* Assets.xcassets */,
+				3FC793C92BAF7D7800C53747 /* food-1050813_1280.jpg */,
 				3F3A27982BAB8C6B0051C218 /* LaunchScreen.storyboard */,
 				3F3A279B2BAB8C6B0051C218 /* Info.plist */,
 				3F3A27932BAB8C690051C218 /* FinalCalorieApp.xcdatamodeld */,
+				3FC793BB2BAE99B100C53747 /* LoginViewController.swift */,
+				3FC793BD2BAE99F400C53747 /* BMIViewController.swift */,
 			);
 			path = FinalCalorieApp;
 			sourceTree = "<group>";
@@ -234,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC793CA2BAF7D7800C53747 /* food-1050813_1280.jpg in Resources */,
 				3F3A27972BAB8C6B0051C218 /* Assets.xcassets in Resources */,
 				3F3A279A2BAB8C6B0051C218 /* Base in Resources */,
 				3F3A27922BAB8C690051C218 /* Base in Resources */,
@@ -261,9 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC793C22BAE9A4C00C53747 /* ProfileEditViewController.swift in Sources */,
 				3F3A278F2BAB8C690051C218 /* ViewController.swift in Sources */,
+				3FC793C62BAF490000C53747 /* CalJournalViewController.swift in Sources */,
+				3FC793BE2BAE99F400C53747 /* BMIViewController.swift in Sources */,
 				3F3A278B2BAB8C690051C218 /* AppDelegate.swift in Sources */,
 				3F3A27952BAB8C690051C218 /* FinalCalorieApp.xcdatamodeld in Sources */,
+				3FC793C02BAE9A2400C53747 /* ProfileViewController.swift in Sources */,
+				3FC793BC2BAE99B100C53747 /* LoginViewController.swift in Sources */,
 				3F3A278D2BAB8C690051C218 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
