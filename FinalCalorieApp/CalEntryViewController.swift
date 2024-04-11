@@ -1,13 +1,13 @@
 //
-//  BMIViewController.swift
+//  CalEntryViewController.swift
 //  FinalCalorieApp
 //
-//  Created by student on 3/23/24.
+//  Created by student on 4/10/24.
 //
 
 import UIKit
 
-class BMIViewController: UIViewController {
+class CalEntryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
