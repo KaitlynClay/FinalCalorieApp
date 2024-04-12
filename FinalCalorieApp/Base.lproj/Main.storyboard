@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login View Controller-->
+        <!--View Controller-->
         <scene sceneID="SxG-y8-7bF">
             <objects>
-                <viewController id="gjS-Wl-Fdy" customClass="LoginViewController" customModule="FinalCalorieApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gjS-Wl-Fdy" customClass="BMIViewController" customModule="FinalCalorieApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DbT-7t-FZX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login"/>
                                 <connections>
-                                    <action selector="loginBtn:" destination="gjS-Wl-Fdy" eventType="touchUpInside" id="b1Y-fG-bPD"/>
+                                    <action selector="loginBtn:" destination="gjS-Wl-Fdy" eventType="touchUpInside" id="lms-kY-ltj"/>
                                     <segue destination="7KT-nz-Wyi" kind="unwind" unwindAction="unwindToHome:" id="NQq-Co-ehW"/>
                                 </connections>
                             </button>
@@ -60,8 +60,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="jV5-uv-O4C"/>
                     <connections>
-                        <outlet property="userHeightEntry" destination="F0C-SS-9ff" id="dfi-p6-vRf"/>
-                        <outlet property="userWeightEntry" destination="uxB-CC-QHl" id="NMQ-9G-eun"/>
+                        <outlet property="userHeightEntry" destination="F0C-SS-9ff" id="qCc-Su-uK0"/>
+                        <outlet property="userWeightEntry" destination="uxB-CC-QHl" id="Tig-Mq-du0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXa-zi-S21" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -110,7 +110,7 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Next"/>
                                 <connections>
                                     <action selector="nexttoBMIBtn:" destination="dos-2D-AmE" eventType="touchUpInside" id="6Mt-Pf-Ww4"/>
-                                    <segue destination="gjS-Wl-Fdy" kind="show" id="83d-zi-Qyh"/>
+                                    <segue destination="gjS-Wl-Fdy" kind="show" identifier="ToBMIViewController" id="83d-zi-Qyh"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -8,6 +8,9 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -19,13 +22,31 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var heightLabel: UILabel!
     
     var db: Firestore!
+    var user: User? // Keep a reference to the current user
 
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         // Do any additional setup after loading the view.
+        
+        // Ensure anonymous authentication
+        authenticateAnonymously()
     }
     
+    func authenticateAnonymously() {
+        Auth.auth().signInAnonymously { (authResult, error) in
+            if let error = error {
+                print("Error authenticating anonymously: \(error.localizedDescription)")
+            } else {
+                // Anonymous authentication successful
+                self.user = authResult?.user
+                
+                // Fetch user data
+                self.fetchUserData()
+            }
+        }
+    }
+
     func fetchUserData() {
         guard let currentUser = Auth.auth().currentUser else {
             print("User not authenticated")
@@ -45,6 +66,11 @@ class ProfileViewController: UIViewController {
                 self.weightLabel.text = "\(weight) lbs"
                 self.heightLabel.text = "\(height) in"
                 self.calculateBMI(weight: weight, height: height)
+                print("Name: \(self.nameLabel.text ?? "")")
+                print("Phone: \(self.phoneLabel.text ?? "")")
+                print("Email: \(self.emailLabel.text ?? "")")
+                print("Weight: \(weight)")
+                print("Height: \(height)")
             } else {
                 print("User document does not exist")
             }

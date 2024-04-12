@@ -16,10 +16,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var userPhoneNumEntry: UITextField!
     @IBOutlet weak var userEmailEntry: UITextField!
     
-    @IBOutlet weak var userWeightEntry: UITextField!
-    @IBOutlet weak var userHeightEntry: UITextField!
-    
-    
     var name: String?
     var phone: String?
     var email: String?
@@ -34,9 +30,9 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func nexttoBMIBtn(_ sender: Any) {
-        guard let name = userNameEntry?.text,
-              let phone = userPhoneNumEntry?.text,
-              let email = userEmailEntry?.text else {
+        guard let name = userNameEntry.text,
+              let phone = userPhoneNumEntry.text,
+              let email = userEmailEntry.text else {
             print("One or more text fields are nil")
             return
         }
@@ -45,45 +41,21 @@ class LoginViewController: UIViewController {
         self.name = name
         self.phone = phone
         self.email = email
-    }
-//    
-    
-    @IBAction func loginBtn(_ sender: Any) {
-        guard let name = self.name,
-              let phone = self.phone,
-              let email = self.email,
-              let weightText = userWeightEntry?.text,
-              let weight = Double(weightText),
-              let heightText = userHeightEntry?.text,
-              let height = Double(heightText) else {
-            print("userNameEntry:", self.name)
-            print("userPhoneNumEntry:", self.phone)
-            print("userEmailEntry:", self.email)
-            print("userWeightEntry:", userWeightEntry?.text)
-            print("userHeightEntry:", userHeightEntry?.text)
-    
-            print("One or more text fields are nil or empty")
-            return
-        }
+        // Proceed to BMIViewController
+       performSegue(withIdentifier: "ToBMIViewController", sender: nil)
+   }
 
-        // Proceed with adding data to Firestore
-        let userData: [String: Any] = [
-            "name": name,
-            "phone": phone,
-            "email": email,
-            "weight": weight,
-            "height": height
-        ]
-
-        db.collection("users").addDocument(data: userData) { error in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added successfully!")
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToBMIViewController" {
+            if let bmiVC = segue.destination as? BMIViewController {
+                bmiVC.name = self.name
+                bmiVC.phone = self.phone
+                bmiVC.email = self.email
             }
         }
     }
-    
+//
+
     /*
     // MARK: - Navigation
 

@@ -51,6 +51,7 @@
 		3FE86E132BC7554F00BCF821 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE86E122BC7554F00BCF821 /* FirebaseStorage */; };
 		3FE86E152BC7554F00BCF821 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE86E142BC7554F00BCF821 /* FirebaseStorageCombine-Community */; };
 		3FE86E172BC7579000BCF821 /* CalEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE86E162BC7579000BCF821 /* CalEntryViewController.swift */; };
+		3FE86E192BC8751700BCF821 /* BMIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE86E182BC8751700BCF821 /* BMIViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		3FC793C92BAF7D7800C53747 /* food-1050813_1280.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "food-1050813_1280.jpg"; sourceTree = "<group>"; };
 		3FE86DDD2BC7547C00BCF821 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FE86E162BC7579000BCF821 /* CalEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalEntryViewController.swift; sourceTree = "<group>"; };
+		3FE86E182BC8751700BCF821 /* BMIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMIViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,9 +175,11 @@
 				3F3A278C2BAB8C690051C218 /* SceneDelegate.swift */,
 				3F3A278E2BAB8C690051C218 /* ViewController.swift */,
 				3FC793C52BAF490000C53747 /* CalJournalViewController.swift */,
+				3FE86E162BC7579000BCF821 /* CalEntryViewController.swift */,
 				3FC793C12BAE9A4C00C53747 /* ProfileEditViewController.swift */,
 				3FC793BF2BAE9A2400C53747 /* ProfileViewController.swift */,
 				3FC793BB2BAE99B100C53747 /* LoginViewController.swift */,
+				3FE86E182BC8751700BCF821 /* BMIViewController.swift */,
 				3F3A27902BAB8C690051C218 /* Main.storyboard */,
 				3F3A27962BAB8C6B0051C218 /* Assets.xcassets */,
 				3FE86DDD2BC7547C00BCF821 /* GoogleService-Info.plist */,
@@ -183,7 +187,6 @@
 				3F3A27982BAB8C6B0051C218 /* LaunchScreen.storyboard */,
 				3F3A279B2BAB8C6B0051C218 /* Info.plist */,
 				3F3A27932BAB8C690051C218 /* FinalCalorieApp.xcdatamodeld */,
-				3FE86E162BC7579000BCF821 /* CalEntryViewController.swift */,
 			);
 			path = FinalCalorieApp;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				3FC793C22BAE9A4C00C53747 /* ProfileEditViewController.swift in Sources */,
 				3F3A278F2BAB8C690051C218 /* ViewController.swift in Sources */,
 				3FE86E172BC7579000BCF821 /* CalEntryViewController.swift in Sources */,
+				3FE86E192BC8751700BCF821 /* BMIViewController.swift in Sources */,
 				3FC793C62BAF490000C53747 /* CalJournalViewController.swift in Sources */,
 				3F3A278B2BAB8C690051C218 /* AppDelegate.swift in Sources */,
 				3F3A27952BAB8C690051C218 /* FinalCalorieApp.xcdatamodeld in Sources */,
