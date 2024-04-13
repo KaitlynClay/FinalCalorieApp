@@ -54,6 +54,7 @@ class ProfileViewController: UIViewController {
         }
 
         let userId = currentUser.uid
+        print("Current User: \(currentUser)")
         
         db.collection("users").document(userId).getDocument { (document, error) in
             if let document = document, document.exists {
