@@ -344,6 +344,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Edit"/>
                                 <connections>
+                                    <action selector="editBtn:" destination="Uge-ab-abf" eventType="touchUpInside" id="1bf-c7-SJf"/>
                                     <segue destination="IaT-GP-NnZ" kind="show" id="CoM-3n-JDY"/>
                                 </connections>
                             </button>
@@ -476,6 +477,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Done"/>
                                 <connections>
+                                    <action selector="doneBtn:" destination="IaT-GP-NnZ" eventType="touchUpInside" id="P2D-wF-esE"/>
                                     <segue destination="89J-gD-my3" kind="unwind" unwindAction="unwindToProfile:" id="fxZ-92-kgH"/>
                                 </connections>
                             </button>
@@ -484,6 +486,13 @@
                         <color key="backgroundColor" cyan="0.5" magenta="0.20000000000000001" yellow="0.010102149100000001" black="0.0039210733959999999" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" id="pWR-0g-c9C"/>
+                    <connections>
+                        <outlet property="emailField" destination="voG-WO-QQH" id="B5X-KA-DZC"/>
+                        <outlet property="heightField" destination="OJS-65-EWC" id="e9L-5f-5Sl"/>
+                        <outlet property="nameField" destination="g4A-Ja-lBY" id="P3n-Ui-EEZ"/>
+                        <outlet property="phoneField" destination="3gB-Ji-gBv" id="0y3-BA-msx"/>
+                        <outlet property="weightField" destination="ego-lG-LD5" id="wTR-WL-cKo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DiD-Sm-71K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="89J-gD-my3" userLabel="Exit" sceneMemberID="exit"/>
@@ -524,7 +533,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiarySystemGroupedBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

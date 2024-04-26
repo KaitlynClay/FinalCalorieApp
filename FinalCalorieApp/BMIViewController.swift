@@ -60,6 +60,27 @@ class BMIViewController: UIViewController {
                 print("Document added successfully!")
             }
         }
+        
+        db.collection("users").getDocuments { (document, error) in
+            if let document = document, !document.isEmpty {
+                let userData = document.documents[0].data()
+                if let name = userData["name"] as? String,
+                   let phone = userData["phone"] as? String,
+                   let email = userData["email"] as? String,
+                   let weight = userData["weight"] as? Double,
+                   let height = userData["height"] as? Double {
+                    print("Name: \(name)")
+                    print("Phone: \(phone)")
+                    print("Email: \(email)")
+                    print("Weight: \(weight)")
+                    print("Height: \(height)")
+                } else {
+                    print("Error: Missing or invalid data in document")
+                }
+            } else {
+                print("User document does not exist or is empty")
+            }
+        }
     }
     
     /*

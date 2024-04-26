@@ -51,7 +51,6 @@ class LoginViewController: UIViewController {
                 if let user = authResult?.user {
                     // Additional signup steps (e.g., save username to database)
                     self.saveUserToDatabase(user: user, username: name)
-                    print("User: \(user)")
                     
                     // Proceed to BMIViewController
                     self.performSegue(withIdentifier: "ToBMIViewController", sender: nil)
@@ -75,7 +74,6 @@ class LoginViewController: UIViewController {
         // Example: Firestore
         let db = Firestore.firestore()
         db.collection("users").document(user.uid).setData(["username": username])
-        print("Username: \(username)")
     }
 
 

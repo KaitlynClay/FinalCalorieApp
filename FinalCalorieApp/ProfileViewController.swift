@@ -42,12 +42,12 @@ class ProfileViewController: UIViewController {
                 self.user = authResult?.user
                 
                 // Fetch user data
-                self.fetchUserData()
+                self.fetchnSetUserData()
             }
         }
     }
 
-    func fetchUserData() {
+    func fetchnSetUserData() {
         guard let currentUser = Auth.auth().currentUser else {
             print("User not authenticated")
             return
@@ -56,24 +56,29 @@ class ProfileViewController: UIViewController {
         let userId = currentUser.uid
         print("Current User: \(currentUser)")
         
-        db.collection("users").document(userId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                let userData = document.data()
-                self.nameLabel.text = userData?["name"] as? String ?? ""
-                self.phoneLabel.text = userData?["phone"] as? String ?? ""
-                self.emailLabel.text = userData?["email"] as? String ?? ""
-                let weight = userData?["weight"] as? Double ?? 0.0
-                let height = userData?["height"] as? Double ?? 0.0
-                self.weightLabel.text = "\(weight) lbs"
-                self.heightLabel.text = "\(height) in"
-                self.calculateBMI(weight: weight, height: height)
-                print("Name: \(self.nameLabel.text ?? "")")
-                print("Phone: \(self.phoneLabel.text ?? "")")
-                print("Email: \(self.emailLabel.text ?? "")")
-                print("Weight: \(weight)")
-                print("Height: \(height)")
+        db.collection("users").getDocuments { (document, error) in
+            if let document = document, !document.isEmpty {
+                let userData = document.documents[0].data()
+                if let name = userData["name"] as? String,
+                   let phone = userData["phone"] as? String,
+                   let email = userData["email"] as? String,
+                   let weight = userData["weight"] as? Double,
+                   let height = userData["height"] as? Double {
+                    
+                    let bmi = (weight / (height * height)) * 703
+                    
+                    self.nameLabel.text = name
+                    self.phoneLabel.text = phone
+                    self.emailLabel.text = email
+                    self.bmiLabel.text = String(format: "%.1f", bmi)
+                    self.heightLabel.text = String(height)
+                    self.weightLabel.text = String(weight)
+        
+                } else {
+                    print("Error: Missing or invalid data in document")
+                }
             } else {
-                print("User document does not exist")
+                print("User document does not exist or is empty")
             }
         }
     }
@@ -82,10 +87,16 @@ class ProfileViewController: UIViewController {
         // Calculate BMI using the provided formula: weight(lb) / [height(in)]^2 * 703
         let bmi = (weight / (height * height)) * 703
         
+        print(bmi)
+        
         self.bmiLabel.text = String(format: "%.1f", bmi)
     }
 
-
+    @IBAction func editBtn(_ sender: Any) {
+        let profileEditVC = ProfileEditViewController()
+        profileEditVC.currentUser = self.user
+    }
+        
     
     @IBAction func unwindToProfile(_ sender: UIStoryboardSegue) {}
 
