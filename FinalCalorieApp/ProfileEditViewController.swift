@@ -20,26 +20,80 @@ class ProfileEditViewController: UIViewController {
     @IBOutlet weak var heightField: UITextField!
     @IBOutlet weak var weightField: UITextField!
     
-//    var currentUser: User?
+////    var currentUser: User?
+//    var db: Firestore!
+//    var currentUser = "vhmNgwxzjjW56I92gGfRxtEG7nC2"
+//    
+//
+//    
+////    Current User: <FIRUser: 0x600002c06000>
+////    PEVC Current User: Optional("vhmNgwxzjjW56I92gGfRxtEG7nC2")
+//
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        db = Firestore.firestore()
+//        print("PEVC Current User: \(currentUser)")
+//
+//        fetchUserData(userId: currentUser)
+//        
+//    }
+//
+//    func fetchUserData(userId: String) {
+//        db.collection("users").document(userId).getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                let userData = document.data()
+//                self.nameField.text = userData?["name"] as? String ?? ""
+//                self.phoneField.text = userData?["phone"] as? String ?? ""
+//                self.emailField.text = userData?["email"] as? String ?? ""
+//                self.fetchHeightAndWeightFromFirestore(userData: userData)
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//    }
+//
+//    func fetchHeightAndWeightFromFirestore(userData: [String: Any]?) {
+//        guard let userData = userData else { return }
+//        self.heightField.text = userData["height"] as? String ?? ""
+//        self.weightField.text = userData["weight"] as? String ?? ""
+//        
+//    }
+    
     var db: Firestore!
-    var currentUser = "vhmNgwxzjjW56I92gGfRxtEG7nC2"
+    var currentUser: User? // Keep a reference to the current user
     
-
-    
-//    Current User: <FIRUser: 0x600002c06000>
-//    PEVC Current User: Optional("vhmNgwxzjjW56I92gGfRxtEG7nC2")
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        print("PEVC Current User: \(currentUser)")
-
-        fetchUserData(userId: currentUser)
         
+        // Ensure user is authenticated before accessing data
+        authenticateUser()
     }
-
-    func fetchUserData(userId: String) {
+    
+    func authenticateUser() {
+        Auth.auth().signInAnonymously { (authResult, error) in
+            if let error = error {
+                print("Error authenticating anonymously: \(error.localizedDescription)")
+            } else {
+                // Anonymous authentication successful
+                self.currentUser = authResult?.user
+                
+                // Fetch user data
+                self.fetchUserData()
+            }
+        }
+    }
+    
+    func fetchUserData() {
+        guard let currentUser = self.currentUser else {
+            print("User not authenticated")
+            return
+        }
+        
+        let userId = currentUser.uid
+        print("Current User: \(currentUser)")
+        
         db.collection("users").document(userId).getDocument { (document, error) in
             if let document = document, document.exists {
                 let userData = document.data()
@@ -52,19 +106,24 @@ class ProfileEditViewController: UIViewController {
             }
         }
     }
-
+    
     func fetchHeightAndWeightFromFirestore(userData: [String: Any]?) {
         guard let userData = userData else { return }
         self.heightField.text = userData["height"] as? String ?? ""
         self.weightField.text = userData["weight"] as? String ?? ""
-        
     }
 
         
         @IBAction func doneBtn(_ sender: Any) {
-            let currentUser = self.currentUser
+            
+            guard let currentUser = self.currentUser else {
+                print("User not authenticated")
+                return
+            }
+            
+            let userId = currentUser.uid
 
-            db.collection("users").document(currentUser).updateData([
+            db.collection("users").document(userId).updateData([
                 "name": nameField.text ?? "",
                 "phone": phoneField.text ?? "",
                 "email": emailField.text ?? "",
@@ -79,6 +138,25 @@ class ProfileEditViewController: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
+        
+            
+//            let currentUser = self.currentUser
+//
+//            db.collection("users").document(currentUser).updateData([
+//                "name": nameField.text ?? "",
+//                "phone": phoneField.text ?? "",
+//                "email": emailField.text ?? "",
+//                "height": heightField.text ?? "",
+//                "weight": weightField.text ?? ""
+//            ]) { error in
+//                if let error = error {
+//                    print("Error updating document: \(error)")
+//                } else {
+//                    print("Document successfully updated")
+//                    // Dismiss the edit view controller
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            }
         }
 
     
