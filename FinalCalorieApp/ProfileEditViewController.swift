@@ -22,22 +22,21 @@ class ProfileEditViewController: UIViewController {
     
 //    var currentUser: User?
     var db: Firestore!
-    var currentUser: User?
+    var currentUser = "vhmNgwxzjjW56I92gGfRxtEG7nC2"
+    
+
+    
+//    Current User: <FIRUser: 0x600002c06000>
+//    PEVC Current User: Optional("vhmNgwxzjjW56I92gGfRxtEG7nC2")
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        self.phoneField.text = "hi"
         print("PEVC Current User: \(currentUser)")
 
-
+        fetchUserData(userId: currentUser)
         
-        // Pre-fill form fields with current user data
-        if let currentUser = currentUser {
-            self.phoneField.text = "hi there"
-
-            fetchUserData(userId: currentUser.uid)
-        }
     }
 
     func fetchUserData(userId: String) {
@@ -58,26 +57,26 @@ class ProfileEditViewController: UIViewController {
         guard let userData = userData else { return }
         self.heightField.text = userData["height"] as? String ?? ""
         self.weightField.text = userData["weight"] as? String ?? ""
+        
     }
 
         
         @IBAction func doneBtn(_ sender: Any) {
-            // Update user data in Firestore
-            if let currentUser = currentUser {
-                db.collection("users").document(currentUser.uid).updateData([
-                    "name": nameField.text ?? "",
-                    "phone": phoneField.text ?? "",
-                    "email": emailField.text ?? "",
-                    "height": heightField.text ?? "",
-                    "weight": weightField.text ?? ""
-                ]) { error in
-                    if let error = error {
-                        print("Error updating document: \(error)")
-                    } else {
-                        print("Document successfully updated")
-                        // Dismiss the edit view controller
-                        self.dismiss(animated: true, completion: nil)
-                    }
+            let currentUser = self.currentUser
+
+            db.collection("users").document(currentUser).updateData([
+                "name": nameField.text ?? "",
+                "phone": phoneField.text ?? "",
+                "email": emailField.text ?? "",
+                "height": heightField.text ?? "",
+                "weight": weightField.text ?? ""
+            ]) { error in
+                if let error = error {
+                    print("Error updating document: \(error)")
+                } else {
+                    print("Document successfully updated")
+                    // Dismiss the edit view controller
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }

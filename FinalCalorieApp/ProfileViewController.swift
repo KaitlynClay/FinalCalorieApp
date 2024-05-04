@@ -94,7 +94,7 @@ class ProfileViewController: UIViewController {
 
     @IBAction func editBtn(_ sender: Any) {
         let profileEditVC = ProfileEditViewController()
-        profileEditVC.currentUser = self.user
+//        profileEditVC.currentUser = self.user
     }
         
     
