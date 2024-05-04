@@ -70,6 +70,12 @@ class ProfileViewController: UIViewController {
                     self.nameLabel.text = name
                     self.phoneLabel.text = phone
                     self.emailLabel.text = email
+                    self.weightLabel.text = String(weight)
+                    self.heightLabel.text = String(height)
+                    
+                    self.nameLabel.text = name
+                    self.phoneLabel.text = phone
+                    self.emailLabel.text = email
                     self.bmiLabel.text = String(format: "%.1f", bmi)
                     self.heightLabel.text = String(height)
                     self.weightLabel.text = String(weight)

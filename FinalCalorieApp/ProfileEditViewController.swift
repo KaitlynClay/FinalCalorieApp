@@ -85,14 +85,6 @@ class ProfileEditViewController: UIViewController {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-
         
         @IBAction func doneBtn(_ sender: Any) {
             guard let currentUser = Auth.auth().currentUser else {
@@ -126,50 +118,6 @@ class ProfileEditViewController: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
-            
-//            guard let currentUser = self.currentUser else {
-//                print("User not authenticated")
-//                return
-//            }
-//            
-//            let userId = currentUser.uid
-//
-//            db.collection("users").document(userId).updateData([
-//                "name": nameField.text ?? "",
-//                "phone": phoneField.text ?? "",
-//                "email": emailField.text ?? "",
-//                "height": heightField.text ?? "",
-//                "weight": weightField.text ?? ""
-//            ]) { error in
-//                if let error = error {
-//                    print("Error updating document: \(error)")
-//                } else {
-//                    print("Document successfully updated")
-//                    // Dismiss the edit view controller
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            }
-            
-            
-        
-            
-//            let currentUser = self.currentUser
-//
-//            db.collection("users").document(currentUser).updateData([
-//                "name": nameField.text ?? "",
-//                "phone": phoneField.text ?? "",
-//                "email": emailField.text ?? "",
-//                "height": heightField.text ?? "",
-//                "weight": weightField.text ?? ""
-//            ]) { error in
-//                if let error = error {
-//                    print("Error updating document: \(error)")
-//                } else {
-//                    print("Document successfully updated")
-//                    // Dismiss the edit view controller
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            }
         }
 
     
