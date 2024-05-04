@@ -20,124 +20,137 @@ class ProfileEditViewController: UIViewController {
     @IBOutlet weak var heightField: UITextField!
     @IBOutlet weak var weightField: UITextField!
     
-////    var currentUser: User?
-//    var db: Firestore!
-//    var currentUser = "vhmNgwxzjjW56I92gGfRxtEG7nC2"
-//    
-//
-//    
-////    Current User: <FIRUser: 0x600002c06000>
-////    PEVC Current User: Optional("vhmNgwxzjjW56I92gGfRxtEG7nC2")
-//
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        db = Firestore.firestore()
-//        print("PEVC Current User: \(currentUser)")
-//
-//        fetchUserData(userId: currentUser)
-//        
-//    }
-//
-//    func fetchUserData(userId: String) {
-//        db.collection("users").document(userId).getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let userData = document.data()
-//                self.nameField.text = userData?["name"] as? String ?? ""
-//                self.phoneField.text = userData?["phone"] as? String ?? ""
-//                self.emailField.text = userData?["email"] as? String ?? ""
-//                self.fetchHeightAndWeightFromFirestore(userData: userData)
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-//    }
-//
-//    func fetchHeightAndWeightFromFirestore(userData: [String: Any]?) {
-//        guard let userData = userData else { return }
-//        self.heightField.text = userData["height"] as? String ?? ""
-//        self.weightField.text = userData["weight"] as? String ?? ""
-//        
-//    }
     
     var db: Firestore!
-    var currentUser: User? // Keep a reference to the current user
-    
+    var user: User? // Keep a reference to the current user
+
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
+        // Do any additional setup after loading the view.
         
-        // Ensure user is authenticated before accessing data
-        authenticateUser()
+        // Ensure anonymous authentication
+        authenticateAnonymously()
     }
     
-    func authenticateUser() {
+    func authenticateAnonymously() {
         Auth.auth().signInAnonymously { (authResult, error) in
             if let error = error {
                 print("Error authenticating anonymously: \(error.localizedDescription)")
             } else {
                 // Anonymous authentication successful
-                self.currentUser = authResult?.user
+                self.user = authResult?.user
                 
                 // Fetch user data
-                self.fetchUserData()
+                self.fetchnSetUserData()
             }
         }
     }
-    
-    func fetchUserData() {
-        guard let currentUser = self.currentUser else {
+
+    func fetchnSetUserData() {
+        guard let currentUser = Auth.auth().currentUser else {
             print("User not authenticated")
             return
         }
-        
+
         let userId = currentUser.uid
         print("Current User: \(currentUser)")
         
-        db.collection("users").document(userId).getDocument { (document, error) in
-            if let document = document, document.exists {
-                let userData = document.data()
-                self.nameField.text = userData?["name"] as? String ?? ""
-                self.phoneField.text = userData?["phone"] as? String ?? ""
-                self.emailField.text = userData?["email"] as? String ?? ""
-                self.fetchHeightAndWeightFromFirestore(userData: userData)
+        db.collection("users").getDocuments { (document, error) in
+            if let document = document, !document.isEmpty {
+                let userData = document.documents[0].data()
+                if let name = userData["name"] as? String,
+                   let phone = userData["phone"] as? String,
+                   let email = userData["email"] as? String,
+                   let weight = userData["weight"] as? Double,
+                   let height = userData["height"] as? Double {
+                                        
+                    print("Name: \(name)")
+                    print("Phone: \(phone)")
+                    print("Email: \(email)")
+                    print("Weight: \(weight)")
+                    print("Height: \(height)")
+                    
+                    self.nameField.text = name
+                    self.phoneField.text = phone
+                    self.emailField.text = email
+                    self.weightField.text = String(weight)
+                    self.heightField.text = String(height)
+        
+                } else {
+                    print("Error: Missing or invalid data in document")
+                }
             } else {
-                print("Document does not exist")
+                print("User document does not exist or is empty")
             }
         }
     }
     
-    func fetchHeightAndWeightFromFirestore(userData: [String: Any]?) {
-        guard let userData = userData else { return }
-        self.heightField.text = userData["height"] as? String ?? ""
-        self.weightField.text = userData["weight"] as? String ?? ""
-    }
+    
+    
+    
+    
+    
+    
 
         
         @IBAction func doneBtn(_ sender: Any) {
-            
-            guard let currentUser = self.currentUser else {
+            guard let currentUser = Auth.auth().currentUser else {
                 print("User not authenticated")
                 return
             }
-            
+
             let userId = currentUser.uid
 
-            db.collection("users").document(userId).updateData([
+            let userData: [String: Any] = [
                 "name": nameField.text ?? "",
                 "phone": phoneField.text ?? "",
                 "email": emailField.text ?? "",
                 "height": heightField.text ?? "",
                 "weight": weightField.text ?? ""
-            ]) { error in
-                if let error = error {
-                    print("Error updating document: \(error)")
-                } else {
-                    print("Document successfully updated")
-                    // Dismiss the edit view controller
-                    self.dismiss(animated: true, completion: nil)
+            ]
+
+            print("NameField: \(nameField.text)")
+            print("PhoneField: \(phoneField.text)")
+            print("EmailField: \(emailField.text)")
+            print("HeightField: \(heightField.text)")
+            print("WeightField: \(weightField.text)")
+
+            let userDocRef = db.collection("users").document(userId)
+                userDocRef.updateData(userData) { error in
+                    if let error = error {
+                        print("Error updating document: \(error)")
+                    } else {
+                        print("Document successfully updated")
+                        // Dismiss the edit view controller
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
-            }
+            
+//            guard let currentUser = self.currentUser else {
+//                print("User not authenticated")
+//                return
+//            }
+//            
+//            let userId = currentUser.uid
+//
+//            db.collection("users").document(userId).updateData([
+//                "name": nameField.text ?? "",
+//                "phone": phoneField.text ?? "",
+//                "email": emailField.text ?? "",
+//                "height": heightField.text ?? "",
+//                "weight": weightField.text ?? ""
+//            ]) { error in
+//                if let error = error {
+//                    print("Error updating document: \(error)")
+//                } else {
+//                    print("Document successfully updated")
+//                    // Dismiss the edit view controller
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            }
+            
+            
         
             
 //            let currentUser = self.currentUser
